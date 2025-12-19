@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopKaro - India's Trusted Online Shopping</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f1f3f6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .logo-subtitle {
+            font-size: 0.65rem;
+            font-style: italic;
+            color: #ffe500;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.875rem 3rem 0.875rem 1.25rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 36px;
+            width: 36px;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .nav-btn:hover {
+            opacity: 0.9;
+        }
+
+        .lang-btn {
+            background: #ffd700;
+            color: #333;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(255,215,0,0.3);
+        }
+
+        .cart-btn {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff6161;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .categories-bar {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 1rem 0;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .categories-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            cursor: pointer;
+            white-space: nowrap;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .category-item:hover {
+            background: #f1f3f6;
+        }
+
+        .category-item.active {
+            color: #764ba2;
+            font-weight: bold;
+            background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
+            border-radius: 12px;
+        }
+
+        .category-icon {
+            font-size: 2rem;
+        }
+
+        .category-name {
+            font-size: 0.85rem;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1rem;
+        }
+
+        .filters-sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            height: fit-content;
+            position: sticky;
+            top: 80px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .filter-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .filter-section:last-child {
+            border-bottom: none;
+        }
+
+        .filter-title {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+        }
+
+        .filter-option input {
+            cursor: pointer;
+        }
+
+        .filter-option label {
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .price-inputs {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .price-input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+        }
+
+        .clear-filters {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(102,126,234,0.3);
+            transition: transform 0.2s;
+        }
+
+        .clear-filters:hover {
+            transform: translateY(-2px);
+        }
+
+        .products-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .sort-btn {
+            padding: 0.6rem 1.2rem;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .sort-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 10px rgba(102,126,234,0.3);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .product-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 20px rgba(102,126,234,0.2);
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-name {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: #212121;
+            min-height: 40px;
+        }
+
+        .product-rating {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 6px rgba(17,153,142,0.3);
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #212121;
+            margin-bottom: 0.25rem;
+        }
+
+        .product-original-price {
+            color: #878787;
+            text-decoration: line-through;
+            font-size: 0.85rem;
+            margin-left: 0.5rem;
+        }
+
+        .product-discount {
+            color: #11998e;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        /* --- New/Revised Styles for Product Detail Page and Modal --- */
+        
+        .product-page {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .product-detail-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .product-detail-image {
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10rem;
+            min-height: 400px;
+            border-radius: 10px;
+        }
+
+        .product-detail-info {
+            padding: 1rem;
+        }
+        
+        .product-detail-features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .product-detail-features li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .product-detail-features li::before {
+            content: '✓';
+            color: #38ef7d;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .back-btn {
+            background: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 4px 12px rgba(240,147,251,0.4);
+            transition: transform 0.2s;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .buy-now-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 12px rgba(250,112,154,0.4);
+            transition: transform 0.2s;
+        }
+
+        .buy-now-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border-radius: 15px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .cart-items {
+            padding: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+        }
+
+        .cart-item-image {
+            font-size: 3rem;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(102,126,234,0.3);
+            transition: transform 0.2s;
+        }
+
+        .quantity-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .remove-btn {
+            background: transparent;
+            color: #ff6161;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .cart-summary {
+            position: sticky;
+            bottom: 0;
+            background: white;
+            padding: 1.5rem 2rem;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #878787;
+            grid-column: 1 / -1; /* Center the message */
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 3rem;
+            color: #878787;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters-sidebar {
+                display: none;
+            }
+            
+            .product-detail-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .products-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .sort-options {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <span onclick="goBackToProducts()" style="cursor: pointer;">ShopKaro</span>
+                <div style="display: flex; flex-direction: column;">
+                    <span class="logo-subtitle" data-en="India's Trusted" data-hi="भारत का विश्वसनीय">India's Trusted</span>
+                </div>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchBox" placeholder="Search for products, brands and more" data-en-placeholder="Search for products, brands and more" data-hi-placeholder="उत्पाद, ब्रांड और अधिक खोजें">
+                <button class="search-btn" onclick="performSearch()">🔍</button>
+            </div>
+            
+            <div class="nav-links">
+                <button class="nav-btn lang-btn" onclick="toggleLanguage()">
+                    <span id="langText">हिंदी</span>
+                </button>
+                <button class="nav-btn" onclick="showLogin()">
+                    <span data-en="Login" data-hi="लॉगिन">Login</span>
+                </button>
+                <button class="nav-btn cart-btn" onclick="showCart()">
+                    🛒 <span data-en="Cart" data-hi="कार्ट">Cart</span>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="categories-bar" id="categoriesBar">
+        <div class="categories-container" id="categoriesContainer"></div>
+    </div>
+
+    <div class="main-container" id="mainContainer">
+        <aside class="filters-sidebar" id="filtersSidebar">
+            
+            <div class="filter-section">
+                <div class="filter-title" data-en="PRICE" data-hi="कीमत">PRICE</div>
+                <div class="price-inputs">
+                    <input type="number" class="price-input" id="minPrice" placeholder="Min" data-en-placeholder="Min" data-hi-placeholder="न्यूनतम">
+                    <span>-</span>
+                    <input type="number" class="price-input" id="maxPrice" placeholder="Max" data-en-placeholder="Max" data-hi-placeholder="अधिकतम">
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <div class="filter-title" data-en="RATING" data-hi="रेटिंग">RATING</div>
+                <div class="filter-option">
+                    <input type="checkbox" id="rating4" value="4">
+                    <label for="rating4" data-en="4★ & above" data-hi="4★ और अधिक">4★ & above</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="rating3" value="3">
+                    <label for="rating3" data-en="3★ & above" data-hi="3★ और अधिक">3★ & above</label>
+                </div>
+            </div>
+            
+            <button class="clear-filters" onclick="clearFilters()">
+                <span data-en="Clear All Filters" data-hi="सभी फ़िल्टर साफ़ करें">Clear All Filters</span>
+            </button>
+        </aside>
+
+        <div class="products-section" id="productsSection">
+            <div class="products-header">
+                <h2 id="productsTitle" data-en="All Products" data-hi="सभी उत्पाद">All Products</h2>
+                <div class="sort-options">
+                    <button class="sort-btn active" onclick="sortProducts('popularity')" data-en="Popularity" data-hi="लोकप्रियता">Popularity</button>
+                    <button class="sort-btn" onclick="sortProducts('price-low')" data-en="Price: Low to High" data-hi="कीमत: कम से अधिक">Price: Low to High</button>
+                    <button class="sort-btn" onclick="sortProducts('price-high')" data-en="Price: High to Low" data-hi="कीमत: अधिक से कम">Price: High to Low</button>
+                    <button class="sort-btn" onclick="sortProducts('rating')" data-en="Rating" data-hi="रेटिंग">Rating</button>
+                </div>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('cartModal')">×</button>
+            <div id="cartContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+        let cart = [];
+        let currentSort = 'popularity';
+        let currentCategory = 'all';
+        let searchQuery = '';
+        
+        // Save initial product list page HTML structure for "Go Back" functionality
+        let initialProductPageHTML = ''; 
+
+        const categories = [
+            { id: 'all', name: 'All', nameHi: 'सभी', icon: '🏠' },
+            { id: 'electronics', name: 'Electronics', nameHi: 'इलेक्ट्रॉनिक्स', icon: '📱' },
+            { id: 'fashion', name: 'Fashion', nameHi: 'फैशन', icon: '👔' },
+            { id: 'home', name: 'Home & Kitchen', nameHi: 'घर और रसोई', icon: '🏡' },
+            { id: 'beauty', name: 'Beauty', nameHi: 'सौंदर्य', icon: '💄' },
+            { id: 'sports', name: 'Sports', nameHi: 'खेल', icon: '⚽' },
+            { id: 'books', name: 'Books', nameHi: 'किताबें', icon: '📚' },
+            { id: 'toys', name: 'Toys', nameHi: 'खिलौने', icon: '🧸' },
+            { id: 'grocery', name: 'Grocery', nameHi: 'किराना', icon: '🛒' }
+        ];
+        
+        // Added 'features' array to product data for the product page
+        const products = [
+            { id: 1, name: "Samsung Galaxy S23", nameHi: "सैमसंग गैलेक्सी S23", price: 74999, originalPrice: 89999, category: 'electronics', rating: 4.5, emoji: "📱", features: ["12GB RAM, 256GB Storage", "50MP Pro-Grade Camera", "Snapdragon 8 Gen 2", "IP68 Water Resistance"] },
+            { id: 2, name: "Apple iPhone 14", nameHi: "एप्पल आईफोन 14", price: 79999, originalPrice: 89900, category: 'electronics', rating: 4.7, emoji: "📱", features: ["A15 Bionic Chip", "Ceramic Shield Front Cover", "12MP Main Camera", "6.1-inch Super Retina XDR"] },
+            { id: 3, name: "OnePlus 11", nameHi: "वनप्लस 11", price: 56999, originalPrice: 61999, category: 'electronics', rating: 4.4, emoji: "📱", features: ["16GB RAM, 512GB Storage", "100W SUPERVOOC Charging", "50MP Main Camera", "Fluid AMOLED Display"] },
+            { id: 4, name: "Men's Cotton Shirt", nameHi: "पुरुषों की कॉटन शर्ट", price: 599, originalPrice: 1299, category: 'fashion', rating: 4.2, emoji: "👔", features: ["100% Premium Cotton", "Regular Fit", "Full Sleeves", "Machine Washable"] },
+            { id: 5, name: "Women's Kurti Set", nameHi: "महिलाओं की कुर्ती सेट", price: 899, originalPrice: 1999, category: 'fashion', rating: 4.3, emoji: "👗", features: ["Rayon Fabric", "Printed Design", "Includes Kurta, Pant, & Dupatta", "Perfect for Festive Wear"] },
+            { id: 6, name: "Jeans for Men", nameHi: "पुरुषों के लिए जींस", price: 799, originalPrice: 1599, category: 'fashion', rating: 4.1, emoji: "👖", features: ["Stretchable Denim", "Slim Fit", "Mid-Rise", "Classic 5 Pocket Style"] },
+            { id: 7, name: "Running Shoes", nameHi: "रनिंग शूज़", price: 1499, originalPrice: 2999, category: 'sports', rating: 4.4, emoji: "👟", features: ["Cushioned Midsole", "Breathable Mesh Upper", "Non-Marking Outsole", "Lace-Up Closure"] },
+            { id: 8, name: "Nike Sports T-Shirt", nameHi: "नाइक स्पोर्ट्स टी-शर्ट", price: 999, originalPrice: 1799, category: 'sports', rating: 4.5, emoji: "👕", features: ["Dri-FIT Technology", "Regular Fit", "100% Polyester", "Quick Dry Fabric"] },
+            { id: 9, name: "Laptop HP Pavilion", nameHi: "लैपटॉप एचपी पैवेलियन", price: 54999, originalPrice: 64999, category: 'electronics', rating: 4.3, emoji: "💻", features: ["Intel Core i5 (12th Gen)", "8GB RAM, 512GB SSD", "15.6-inch FHD Display", "Windows 11 Home"] },
+            { id: 10, name: "Dell Inspiron 15", nameHi: "डेल इंस्पायरॉन 15", price: 49999, originalPrice: 59999, category: 'electronics', rating: 4.2, emoji: "💻", features: ["AMD Ryzen 5 Processor", "16GB RAM, 1TB HDD+256GB SSD", "15.6-inch Display", "Integrated Graphics"] },
+            { id: 11, name: "Wireless Mouse", nameHi: "वायरलेस माउस", price: 499, originalPrice: 999, category: 'electronics', rating: 4.1, emoji: "🖱️", features: ["2.4GHz USB Receiver", "1200 DPI Optical Sensor", "Ergonomic Design", "Up to 12 Month Battery Life"] },
+            { id: 12, name: "Keyboard Mechanical", nameHi: "मैकेनिकल कीबोर्ड", price: 1999, originalPrice: 3499, category: 'electronics', rating: 4.6, emoji: "⌨️", features: ["Blue Switches", "RGB Backlighting", "Full Size Layout", "Durable Metal Body"] },
+            { id: 13, name: "Smart Watch", nameHi: "स्मार्ट वॉच", price: 2999, originalPrice: 4999, category: 'electronics', rating: 4.3, emoji: "⌚", features: ["1.8-inch HD Display", "Heart Rate Monitor", "IP68 Water Resistance", "7-Day Battery Backup"] },
+            { id: 14, name: "Bluetooth Earbuds", nameHi: "ब्लूटूथ ईयरबड्स", price: 1299, originalPrice: 2499, category: 'electronics', rating: 4.4, emoji: "🎧", features: ["Active Noise Cancellation", "Up to 30 Hours Playback", "Voice Assistant Support", "Clear Bass Technology"] },
+            { id: 15, name: "Power Bank 20000mAh", nameHi: "पावर बैंक 20000mAh", price: 999, originalPrice: 1999, category: 'electronics', rating: 4.2, emoji: "🔋", features: ["20W Fast Charging", "Dual Output Ports", "Li-Polymer Battery", "Sleek and Portable Design"] },
+            { id: 16, name: "Saree Silk", nameHi: "सिल्क साड़ी", price: 1999, originalPrice: 3999, category: 'fashion', rating: 4.6, emoji: "🥻", features: ["Art Silk Fabric", "Zari Woven Border", "Unstitched Blouse Piece", "Dry Clean Only"] },
+            { id: 17, name: "Salwar Suit", nameHi: "सलवार सूट", price: 1499, originalPrice: 2999, category: 'fashion', rating: 4.4, emoji: "👘", features: ["Cotton Blend", "Embroidered Work", "Semi-Stitched", "Suitable for Casual Wear"] },
+            { id: 18, name: "Ethnic Dress", nameHi: "एथनिक ड्रेस", price: 1299, originalPrice: 2499, category: 'fashion', rating: 4.3, emoji: "👗", features: ["Georgette Fabric", "Flared Hem", "Round Neck", "Full Lining"] },
+            { id: 19, name: "Men's Jacket", nameHi: "पुरुषों की जैकेट", price: 1799, originalPrice: 3499, category: 'fashion', rating: 4.5, emoji: "🧥", features: ["Padded Quilted Design", "High Neck", "Zip Closure", "Warm and Lightweight"] },
+            { id: 20, name: "Women's Handbag", nameHi: "महिलाओं का हैंडबैग", price: 899, originalPrice: 1799, category: 'fashion', rating: 4.2, emoji: "👜", features: ["Faux Leather Material", "Double Handle", "Multiple Compartments", "Adjustable Sling Strap"] },
+            { id: 21, name: "Pressure Cooker", nameHi: "प्रेशर कुकर", price: 1499, originalPrice: 2499, category: 'home', rating: 4.5, emoji: "🍲", features: ["5 Litre Capacity", "Aluminum Body", "Outer Lid Design", "Induction Base"] },
+            { id: 22, name: "Mixer Grinder", nameHi: "मिक्सर ग्राइंडर", price: 2999, originalPrice: 4999, category: 'home', rating: 4.4, emoji: "🔌", features: ["750 Watt Motor", "3 Stainless Steel Jars", "Overload Protection", "3 Speed Control"] },
+            { id: 23, name: "Induction Cooktop", nameHi: "इंडक्शन कुकटॉप", price: 1999, originalPrice: 3499, category: 'home', rating: 4.3, emoji: "🔥", features: ["2000 Watts Power", "Push Button Control", "Auto Shut-Off", "Timer Function"] },
+            { id: 24, name: "Electric Kettle", nameHi: "इलेक्ट्रिक केटल", price: 699, originalPrice: 1299, category: 'home', rating: 4.2, emoji: "☕", features: ["1.5 Litre Capacity", "Stainless Steel Body", "Auto Cut-Off", "360-Degree Swivel Base"] },
+            { id: 25, name: "Rice Cooker", nameHi: "राइस कुकर", price: 1299, originalPrice: 2299, category: 'home', rating: 4.4, emoji: "🍚", features: ["1.8 Litre Capacity", "Automatic Keep Warm Function", "Two Cooking Modes", "Non-Stick Inner Pot"] },
+            { id: 26, name: "Bed Sheet Set", nameHi: "बेड शीट सेट", price: 799, originalPrice: 1599, category: 'home', rating: 4.3, emoji: "🛏️", features: ["100% Cotton", "King Size", "Includes 2 Pillow Covers", "Soft and Breathable Fabric"] },
+            { id: 27, name: "Curtains Set", nameHi: "पर्दे का सेट", price: 999, originalPrice: 1999, category: 'home', rating: 4.1, emoji: "🪟", features: ["Blackout Fabric", "Set of 2", "Rod Pocket Design", "Sound Reducing"] },
+            { id: 28, name: "Table Lamp", nameHi: "टेबल लैंप", price: 499, originalPrice: 999, category: 'home', rating: 4.2, emoji: "💡", features: ["Adjustable Arm", "Metal Body", "E27 Bulb Holder", "Modern Design"] },
+            { id: 29, name: "Wall Clock", nameHi: "दीवार घड़ी", price: 599, originalPrice: 1199, category: 'home', rating: 4.0, emoji: "🕐", features: ["Silent Sweep Movement", "Large 12-inch Dial", "Wooden Finish Frame", "Battery Operated"] },
+            { id: 30, name: "Floor Mat", nameHi: "फर्श की चटाई", price: 399, originalPrice: 799, category: 'home', rating: 4.1, emoji: "🎨", features: ["Anti-Skid Backing", "Washable", "Absorbent Material", "Size: 40x60 cm"] },
+            { id: 31, name: "Face Cream", nameHi: "फेस क्रीम", price: 399, originalPrice: 699, category: 'beauty', rating: 4.3, emoji: "💄", features: ["SPF 30 Protection", "Non-Greasy Formula", "For All Skin Types", "Hydrating and Moisturizing"] },
+            { id: 32, name: "Lipstick Set", nameHi: "लिपस्टिक सेट", price: 599, originalPrice: 999, category: 'beauty', rating: 4.4, emoji: "💋", features: ["Set of 5 Matte Shades", "Long-Lasting Formula", "Transfer-Proof", "Cruelty-Free"] },
+            { id: 33, name: "Perfume", nameHi: "परफ्यूम", price: 799, originalPrice: 1499, category: 'beauty', rating: 4.5, emoji: "🌸", features: ["Eau De Parfum", "Floral and Woody Notes", "Long-Lasting Fragrance", "100ml Bottle"] },
+            { id: 34, name: "Hair Dryer", nameHi: "हेयर ड्रायर", price: 1299, originalPrice: 2299, category: 'beauty', rating: 4.2, emoji: "💨", features: ["1200W Power", "2 Heat/Speed Settings", "Cool Shot Button", "Folding Handle"] },
+            { id: 35, name: "Makeup Kit", nameHi: "मेकअप किट", price: 1999, originalPrice: 3499, category: 'beauty', rating: 4.6, emoji: "💅", features: ["All-in-One Kit", "Includes Eyeshadow, Blush, & Lipstick", "Professional Grade", "Travel Friendly Case"] },
+            { id: 36, name: "Shampoo & Conditioner", nameHi: "शैम्पू और कंडीशनर", price: 499, originalPrice: 899, category: 'beauty', rating: 4.3, emoji: "🧴", features: ["Sulfate-Free", "Keratin Enriched", "For Dry & Damaged Hair", "500ml Each"] },
+            { id: 37, name: "Face Wash", nameHi: "फेस वॉश", price: 299, originalPrice: 499, category: 'beauty', rating: 4.2, emoji: "🧼", features: ["Deep Cleansing Action", "Oil-Free Formula", "Enriched with Neem", "Suitable for Acne-Prone Skin"] },
+            { id: 38, name: "Body Lotion", nameHi: "बॉडी लोशन", price: 349, originalPrice: 599, category: 'beauty', rating: 4.1, emoji: "🧴", features: ["24-Hour Hydration", "Shea Butter Formula", "Non-Sticky", "Quickly Absorbed"] },
+            { id: 39, name: "Sunscreen SPF 50", nameHi: "सनस्क्रीन SPF 50", price: 599, originalPrice: 999, category: 'beauty', rating: 4.4, emoji: "☀️", features: ["Broad Spectrum Protection", "Water Resistant", "PABA-Free", "Lightweight Feel"] },
+            { id: 40, name: "Nail Polish Set", nameHi: "नेल पॉलिश सेट", price: 399, originalPrice: 699, category: 'beauty', rating: 4.2, emoji: "💅", features: ["Set of 10 Vibrant Colors", "Chip Resistant", "Quick Drying", "High Gloss Finish"] },
+            { id: 41, name: "Cricket Bat", nameHi: "क्रिकेट बैट", price: 1999, originalPrice: 3499, category: 'sports', rating: 4.5, emoji: "🏏", features: ["Kashmir Willow", "Short Handle", "Excellent Balance", "Thick Edges"] },
+            { id: 42, name: "Football", nameHi: "फुटबॉल", price: 599, originalPrice: 1199, category: 'sports', rating: 4.3, emoji: "⚽", features: ["Size 5", "Machine Stitched Panels", "Durable PU Material", "Suitable for All Grounds"] },
+            { id: 43, name: "Badminton Racket", nameHi: "बैडमिंटन रैकेट", price: 899, originalPrice: 1799, category: 'sports', rating: 4.4, emoji: "🏸", features: ["Aluminum Frame", "High Tension String", "Lightweight", "Includes Full Cover"] },
+            { id: 44, name: "Yoga Mat", nameHi: "योग मैट", price: 499, originalPrice: 999, category: 'sports', rating: 4.2, emoji: "🧘", features: ["TPE Material", "6mm Thickness", "Non-Slip Surface", "Easy to Roll Up"] },
+            { id: 45, name: "Gym Bag", nameHi: "जिम बैग", price: 799, originalPrice: 1499, category: 'sports', rating: 4.1, emoji: "🎒", features: ["Durable Polyester Fabric", "Shoe Compartment", "Adjustable Shoulder Strap", "50 Litre Capacity"] },
+            { id: 46, name: "Water Bottle", nameHi: "पानी की बोतल", price: 299, originalPrice: 599, category: 'sports', rating: 4.3, emoji: "💧", features: ["BPA-Free Plastic", "1 Litre Capacity", "Leak-Proof Lid", "Easy-Grip Design"] },
+            { id: 47, name: "Dumbbells Set", nameHi: "डंबल सेट", price: 1499, originalPrice: 2499, category: 'sports', rating: 4.5, emoji: "🏋️", features: ["3 Pair Set (1kg, 2kg, 3kg)", "Vinyl Coated", "Non-Slip Grip", "Compact Storage"] },
+            { id: 48, name: "Skipping Rope", nameHi: "स्किपिंग रोप", price: 199, originalPrice: 399, category: 'sports', rating: 4.0, emoji: "🪢", features: ["Adjustable Length", "Ergonomic Handles", "Steel Wire Cable", "Smooth Rotation"] },
+            { id: 49, name: "Tennis Ball", nameHi: "टेनिस बॉल", price: 299, originalPrice: 599, category: 'sports', rating: 4.2, emoji: "🎾", features: ["Pack of 3", "High Bounce", "Durable Felt Cover", "Suitable for Practice"] },
+            { id: 50, name: "Swimming Goggles", nameHi: "स्विमिंग गॉगल्स", price: 399, originalPrice: 799, category: 'sports', rating: 4.3, emoji: "🥽", features: ["Anti-Fog Lenses", "UV Protection", "Adjustable Strap", "Leak-Resistant Seal"] },
+            { id: 51, name: "Fiction Novel", nameHi: "काल्पनिक उपन्यास", price: 299, originalPrice: 499, category: 'books', rating: 4.4, emoji: "📚", features: ["Bestseller Title", "Paperback Edition", "320 Pages", "Award-Winning Author"] },
+            { id: 52, name: "Self Help Book", nameHi: "सेल्फ हेल्प बुक", price: 349, originalPrice: 599, category: 'books', rating: 4.5, emoji: "📖", features: ["Practical Tips", "Motivational Content", "Easy to Read", "Globally Acclaimed"] },
+            { id: 53, name: "Children's Story Book", nameHi: "बच्चों की कहानी की किताब", price: 199, originalPrice: 399, category: 'books', rating: 4.3, emoji: "📕", features: ["Ages 4-8", "Colourful Illustrations", "Moral Stories", "Large Print"] },
+            { id: 54, name: "Cookbook", nameHi: "कुकबुक", price: 399, originalPrice: 699, category: 'books', rating: 4.2, emoji: "🍳", features: ["Indian & International Cuisine", "Vegetarian Recipes", "Step-by-Step Instructions", "Hardcover"] },
+            { id: 55, name: "Mystery Novel", nameHi: "रहस्य उपन्यास", price: 299, originalPrice: 549, category: 'books', rating: 4.6, emoji: "🔍", features: ["Gripping Plot", "International Settings", "Best in Crime Thriller Genre", "Translated into 10 Languages"] },
+            { id: 56, name: "Biography", nameHi: "जीवनी", price: 449, originalPrice: 799, category: 'books', rating: 4.4, emoji: "📝", features: ["Life of a Famous Leader", "Detailed Research", "Insightful Interviews", "Highly Rated"] },
+            { id: 57, name: "Poetry Collection", nameHi: "कविता संग्रह", price: 249, originalPrice: 499, category: 'books', rating: 4.3, emoji: "✍️", features: ["Contemporary Poetry", "Beautifully Designed Cover", "Short & Moving Verses", "Pocket-Sized"] },
+            { id: 58, name: "Dictionary", nameHi: "शब्दकोश", price: 599, originalPrice: 999, category: 'books', rating: 4.1, emoji: "📙", features: ["English to Hindi", "Over 50,000 Words", "Pronunciation Guide", "Student Edition"] },
+            { id: 59, name: "Comics Set", nameHi: "कॉमिक्स सेट", price: 399, originalPrice: 699, category: 'books', rating: 4.5, emoji: "📰", features: ["Pack of 5 Comics", "Superhero Theme", "High Quality Paper", "Collectors Edition"] },
+            { id: 60, name: "Study Guide", nameHi: "अध्ययन गाइड", price: 499, originalPrice: 899, category: 'books', rating: 4.2, emoji: "📚", features: ["For Class 12 Science", "Includes Practice Papers", "Detailed Solutions", "Latest Syllabus"] },
+            { id: 61, name: "Remote Control Car", nameHi: "रिमोट कंट्रोल कार", price: 1299, originalPrice: 2299, category: 'toys', rating: 4.5, emoji: "🚗", features: ["4-Wheel Drive", "Rechargeable Battery", "Working Headlights", "Ages 6 and Above"] },
+            { id: 62, name: "Doll House", nameHi: "डॉल हाउस", price: 1999, originalPrice: 3499, category: 'toys', rating: 4.4, emoji: "🏠", features: ["Multi-Story Design", "Includes Furniture Set", "Made of Non-Toxic Wood", "Easy Assembly"] },
+            { id: 63, name: "Building Blocks", nameHi: "बिल्डिंग ब्लॉक्स", price: 699, originalPrice: 1299, category: 'toys', rating: 4.6, emoji: "🧱", features: ["1000+ Pieces", "Assorted Colors & Shapes", "Develops Motor Skills", "Storage Box Included"] },
+            { id: 64, name: "Puzzle Game", nameHi: "पहेली गेम", price: 399, originalPrice: 799, category: 'toys', rating: 4.3, emoji: "🧩", features: ["1000 Piece Jigsaw", "Vibrant Landscape Image", "Precision Cut", "Challenge Level: Hard"] },
+            { id: 65, name: "Stuffed Teddy Bear", nameHi: "स्टफ्ड टेडी बियर", price: 599, originalPrice: 1199, category: 'toys', rating: 4.5, emoji: "🧸", features: ["Soft and Huggable", "Height: 2 Feet", "Washable Material", "Safe for All Ages"] },
+            { id: 66, name: "Board Game", nameHi: "बोर्ड गेम", price: 899, originalPrice: 1599, category: 'toys', rating: 4.4, emoji: "🎲", features: ["Family Fun Game", "Ages 8+", "For 2-4 Players", "Includes Dice and Tokens"] },
+            { id: 67, name: "Action Figure", nameHi: "एक्शन फिगर", price: 499, originalPrice: 999, category: 'toys', rating: 4.2, emoji: "🦸", features: ["Movable Joints", "Includes Accessories", "Based on Popular Movie Character", "Height: 6 inches"] },
+            { id: 68, name: "Musical Toy", nameHi: "म्यूजिकल टॉय", price: 799, originalPrice: 1499, category: 'toys', rating: 4.3, emoji: "🎵", features: ["Electronic Piano", "Multiple Instrument Sounds", "Recording Function", "Colorful Keys"] },
+            { id: 69, name: "Toy Kitchen Set", nameHi: "टॉय किचन सेट", price: 1599, originalPrice: 2999, category: 'toys', rating: 4.5, emoji: "🍳", features: ["30+ Accessories", "Realistic Sounds", "Safe, Durable Plastic", "Role Play Toy"] },
+            { id: 70, name: "Ball Pool", nameHi: "बॉल पूल", price: 1299, originalPrice: 2299, category: 'toys', rating: 4.1, emoji: "🎱", features: ["Pop-Up Design", "Includes 50 Balls", "Indoor/Outdoor Use", "Easy to Store"] },
+            { id: 71, name: "Basmati Rice 5kg", nameHi: "बासमती चावल 5kg", price: 499, originalPrice: 699, category: 'grocery', rating: 4.4, emoji: "🌾", features: ["Aged Basmati", "Extra Long Grain", "Aromatic", "Perfect for Biryani"] },
+            { id: 72, name: "Wheat Flour 10kg", nameHi: "गेहूं का आटा 10kg", price: 399, originalPrice: 599, category: 'grocery', rating: 4.3, emoji: "🌾", features: ["Whole Wheat", "Finely Ground", "Easy to Knead", "High Fiber Content"] },
+            { id: 73, name: "Cooking Oil 5L", nameHi: "खाना पकाने का तेल 5L", price: 899, originalPrice: 1299, category: 'grocery', rating: 4.2, emoji: "🛢️", features: ["Refined Sunflower Oil", "Rich in Vitamins", "Zero Cholesterol", "Suitable for Deep Frying"] },
+            { id: 74, name: "Tea Leaves 1kg", nameHi: "चाय की पत्ती 1kg", price: 299, originalPrice: 499, category: 'grocery', rating: 4.5, emoji: "🍵", features: ["Assam Blend", "Strong Flavor", "Dust Tea", "Makes 500+ Cups"] },
+            { id: 75, name: "Sugar 5kg", nameHi: "चीनी 5kg", price: 249, originalPrice: 399, category: 'grocery', rating: 4.1, emoji: "🍬", features: ["Fine Granulated Sugar", "Natural Sweetener", "Hygienically Packed", "FSSAI Certified"] },
+            { id: 76, name: "Pulses Combo", nameHi: "दालों का कॉम्बो", price: 599, originalPrice: 999, category: 'grocery', rating: 4.4, emoji: "🫘", features: ["5 types of Pulses (1kg each)", "High Protein", "Unpolished", "Easy to Cook"] },
+            { id: 77, name: "Spices Set", nameHi: "मसाला सेट", price: 399, originalPrice: 699, category: 'grocery', rating: 4.6, emoji: "🌶️", features: ["Set of 10 Essential Spices", "Ground Powder Form", "Airtight Packaging", "Guaranteed Freshness"] },
+            { id: 78, name: "Instant Noodles Pack", nameHi: "इंस्टेंट नूडल्स पैक", price: 199, originalPrice: 349, category: 'grocery', rating: 4.0, emoji: "🍜", features: ["Pack of 12", "Masala Flavour", "Ready in 2 Minutes", "No Preservatives"] },
+            { id: 79, name: "Biscuits Combo", nameHi: "बिस्किट कॉम्बो", price: 299, originalPrice: 499, category: 'grocery', rating: 4.2, emoji: "🍪", features: ["4 Assorted Packs", "Crunchy & Delicious", "Great for Tea Time", "Vegetarian Product"] },
+            { id: 80, name: "Cold Drink Pack", nameHi: "कोल्ड ड्रिंक पैक", price: 399, originalPrice: 599, category: 'grocery', rating: 4.1, emoji: "🥤", features: ["6 x 600ml Bottles", "Assorted Flavors", "Chilled Refreshment", "Expiry Date: 6 Months"] },
+            { id: 81, name: "Gaming Headset", nameHi: "गेमिंग हेडसेट", price: 1999, originalPrice: 3499, category: 'electronics', rating: 4.6, emoji: "🎧", features: ["7.1 Surround Sound", "Noise-Cancelling Mic", "RGB Lighting", "Compatible with PC/Console"] },
+            { id: 82, name: "Webcam HD", nameHi: "वेबकैम HD", price: 1499, originalPrice: 2499, category: 'electronics', rating: 4.3, emoji: "📹", features: ["1080p Resolution", "Built-in Microphone", "Auto Focus", "Plug & Play USB"] },
+            { id: 83, name: "USB Flash Drive 64GB", nameHi: "USB फ्लैश ड्राइव 64GB", price: 599, originalPrice: 999, category: 'electronics', rating: 4.2, emoji: "💾", features: ["USB 3.0 High Speed", "Metal Body", "Water Resistant", "Keychain Loop"] },
+            { id: 84, name: "External Hard Disk 1TB", nameHi: "एक्सटर्नल हार्ड डिस्क 1TB", price: 3999, originalPrice: 5999, category: 'electronics', rating: 4.5, emoji: "💿", features: ["USB 3.0", "Fast Data Transfer", "Shock Resistant", "Pre-formatted for Windows"] },
+            { id: 85, name: "Tablet Android", nameHi: "एंड्रॉइड टैबलेट", price: 9999, originalPrice: 14999, category: 'electronics', rating: 4.4, emoji: "📱", features: ["10.1 inch HD Display", "4GB RAM, 64GB Storage", "Android 13 OS", "Dual Speakers"] },
+            { id: 86, name: "Smart TV 43 inch", nameHi: "स्मार्ट टीवी 43 इंच", price: 24999, originalPrice: 34999, category: 'electronics', rating: 4.6, emoji: "📺", features: ["4K Ultra HD Display", "Smart Android TV", "Dolby Audio", "3 HDMI Ports"] },
+            { id: 87, name: "Soundbar", nameHi: "साउंडबार", price: 4999, originalPrice: 7999, category: 'electronics', rating: 4.4, emoji: "🔊", features: ["100W Output", "Wireless Subwoofer", "Bluetooth Connectivity", "Wall Mountable"] },
+            { id: 88, name: "Router WiFi", nameHi: "राउटर WiFi", price: 1299, originalPrice: 2299, category: 'electronics', rating: 4.3, emoji: "📡", features: ["Dual Band (2.4GHz/5GHz)", "High Speed (AC1200)", "4 External Antennas", "Easy Setup"] },
+            { id: 89, name: "Bluetooth Speaker", nameHi: "ब्लूटूथ स्पीकर", price: 999, originalPrice: 1999, category: 'electronics', rating: 4.5, emoji: "🔈", features: ["10W Stereo Sound", "IPX7 Waterproof", "10-Hour Playtime", "Built-in Mic"] },
+            { id: 90, name: "Tripod Stand", nameHi: "ट्राइपॉड स्टैंड", price: 799, originalPrice: 1499, category: 'electronics', rating: 4.2, emoji: "📷", features: ["Height up to 5 Feet", "Adjustable Ball Head", "Lightweight Aluminum", "Mobile Phone Holder Included"] },
+            { id: 91, name: "Winter Jacket", nameHi: "विंटर जैकेट", price: 2499, originalPrice: 4999, category: 'fashion', rating: 4.5, emoji: "🧥", features: ["Thermal Insulation", "Water Repellent Fabric", "Detachable Hood", "Inner Fleece Lining"] },
+            { id: 92, name: "Formal Shoes", nameHi: "फॉर्मल शूज़", price: 1799, originalPrice: 3499, category: 'fashion', rating: 4.3, emoji: "👞", features: ["Genuine Leather Upper", "Lace-Up Style", "Cushioned Insole", "Durable TPR Sole"] },
+            { id: 93, name: "Casual Sneakers", nameHi: "कैजुअल स्नीकर्स", price: 1299, originalPrice: 2499, category: 'fashion', rating: 4.4, emoji: "👟", features: ["Canvas Upper", "Flat Rubber Sole", "Comfort Fit", "Stylish Design"] },
+            { id: 94, name: "Wallet Leather", nameHi: "लेदर वॉलेट", price: 599, originalPrice: 1199, category: 'fashion', rating: 4.2, emoji: "👛", features: ["Bi-Fold Design", "Genuine Cow Leather", "Multiple Card Slots", "Coin Pocket with Zip"] },
+            { id: 95, name: "Sunglasses", nameHi: "धूप का चश्मा", price: 799, originalPrice: 1599, category: 'fashion', rating: 4.3, emoji: "🕶️", features: ["Polarized Lenses", "UV400 Protection", "Metal Frame", "Includes Hard Case"] },
+            { id: 96, name: "Backpack", nameHi: "बैकपैक", price: 1299, originalPrice: 2299, category: 'fashion', rating: 4.5, emoji: "🎒", features: ["30 Litre Capacity", "Water Resistant Fabric", "Laptop Compartment (15.6 inch)", "Ergonomic Shoulder Straps"] },
+            { id: 97, name: "Belt", nameHi: "बेल्ट", price: 399, originalPrice: 799, category: 'fashion', rating: 4.1, emoji: "👔", features: ["Reversible Leather Belt", "Black and Brown Sides", "Automatic Buckle", "Size 30-40"] },
+            { id: 98, name: "Scarf", nameHi: "स्कार्फ", price: 299, originalPrice: 599, category: 'fashion', rating: 4.0, emoji: "🧣", features: ["Soft Wool Blend", "Solid Color", "Tassel Edges", "Generous Size"] },
+            { id: 99, name: "Cap", nameHi: "कैप", price: 249, originalPrice: 499, category: 'fashion', rating: 4.2, emoji: "🧢", features: ["100% Cotton Twill", "Adjustable Strap", "Six-Panel Design", "Breathable Eyelets"] },
+            { id: 100, name: "Socks Pack", nameHi: "मोज़े पैक", price: 199, originalPrice: 399, category: 'fashion', rating: 4.1, emoji: "🧦", features: ["Pack of 5 Pairs", "Ankle Length", "Cotton Blend", "Anti-Microbial Treatment"] }
+        ];
+
+        function init() {
+            // Save the initial structure *after* the DOM has loaded
+            const mainContainer = document.getElementById('mainContainer');
+            initialProductPageHTML = mainContainer.innerHTML;
+            
+            renderCategories();
+            setupFilterListeners(); // Set up listeners once
+            applyFilters();
+            updateCartCount();
+        }
+        
+        function setupFilterListeners() {
+            document.getElementById('searchBox').addEventListener('input', performSearch);
+            document.getElementById('minPrice').addEventListener('change', applyFilters);
+            document.getElementById('maxPrice').addEventListener('change', applyFilters);
+            document.getElementById('rating4')?.addEventListener('change', applyFilters);
+            document.getElementById('rating3')?.addEventListener('change', applyFilters);
+            // Ensure the initial active sort button is set
+            document.querySelector(`.sort-btn[onclick="sortProducts('popularity')"]`).classList.add('active');
+        }
+
+
+        function renderCategories() {
+            const container = document.getElementById('categoriesContainer');
+            // This is the navigation bar, so we keep the whole list
+            container.innerHTML = categories.map(cat => `
+                <div class="category-item ${currentCategory === cat.id ? 'active' : ''}" onclick="selectCategory('${cat.id}')">
+                    <div class="category-icon">${cat.icon}</div>
+                    <div class="category-name" data-en="${cat.name}" data-hi="${cat.nameHi}">${currentLang === 'en' ? cat.name : cat.nameHi}</div>
+                </div>
+            `).join('');
+            
+            // Note: Sidebar Category Filters are removed from the HTML and JS now.
+        }
+
+        function selectCategory(catId) {
+            currentCategory = catId;
+            renderCategories(); // Re-render to update the 'active' state
+            applyFilters(); // Apply the new category filter
+        }
+
+        function applyFilters() {
+            // Ensure we are viewing the product list section before applying filters
+            if (!document.getElementById('productsSection')) {
+                goBackToProducts();
+            }
+            
+            let filtered = [...products];
+
+            // 1. Search filter
+            if (searchQuery) {
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    p.nameHi.includes(searchQuery) ||
+                    categories.find(c => c.id === p.category)?.name.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+            }
+
+            // 2. Category filter (from top bar only)
+            if (currentCategory !== 'all') {
+                filtered = filtered.filter(p => p.category === currentCategory);
+                
+                const categoryName = categories.find(c => c.id === currentCategory)?.name;
+                const categoryNameHi = categories.find(c => c.id === currentCategory)?.nameHi;
+                const titleText = currentLang === 'en' ? `${categoryName} Products` : `${categoryNameHi} उत्पाद`;
+                document.getElementById('productsTitle').textContent = titleText;
+            } else {
+                document.getElementById('productsTitle').textContent = currentLang === 'en' ? 'All Products' : 'सभी उत्पाद';
+            }
+
+
+            // 3. Price filter
+            const minPrice = parseInt(document.getElementById('minPrice')?.value) || 0;
+            const maxPrice = parseInt(document.getElementById('maxPrice')?.value) || Infinity;
+            filtered = filtered.filter(p => p.price >= minPrice && p.price <= maxPrice);
+
+            // 4. Rating filter (Only one can be selected)
+            const rating4 = document.getElementById('rating4')?.checked;
+            const rating3 = document.getElementById('rating3')?.checked;
+            
+            if (rating4) {
+                filtered = filtered.filter(p => p.rating >= 4);
+                // Ensure rating3 is unchecked if rating4 is checked (optional UI enforcement)
+                document.getElementById('rating3').checked = false; 
+            } else if (rating3) {
+                filtered = filtered.filter(p => p.rating >= 3);
+            }
+
+            renderProducts(filtered);
+            updateLanguage();
+        }
+
+        function sortProducts(type) {
+            currentSort = type;
+            document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+            // Use event.currentTarget if we're sure this function is only called from button clicks, 
+            // but for a clean simulation:
+            const buttonClicked = document.querySelector(`.sort-btn[onclick="sortProducts('${type}')"]`);
+            if(buttonClicked) {
+                buttonClicked.classList.add('active');
+            }
+            applyFilters();
+        }
+
+        function renderProducts(productsToRender) {
+            let sorted = [...productsToRender];
+
+            switch(currentSort) {
+                case 'price-low':
+                    sorted.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    sorted.sort((a, b) => b.price - a.price);
+                    break;
+                case 'rating':
+                case 'popularity': // Default to rating for popularity
+                    sorted.sort((a, b) => b.rating - a.rating);
+                    break;
+            }
+
+            const grid = document.getElementById('productsGrid');
+            
+            if (!grid) return; // Exit if the products grid is not currently in the DOM (i.e. we are on a detail page)
+
+            if (sorted.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <h3 data-en="No products found" data-hi="कोई उत्पाद नहीं मिला">${currentLang === 'en' ? 'No products found' : 'कोई उत्पाद नहीं मिला'}</h3>
+                        <p data-en="Try adjusting your filters" data-hi="अपने फ़िल्टर समायोजित करने का प्रयास करें">${currentLang === 'en' ? 'Try adjusting your filters' : 'अपने फ़िल्टर समायोजित करने का प्रयास करें'}</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = sorted.map(p => {
+                const discount = Math.round((p.originalPrice - p.price) / p.originalPrice * 100);
+                const name = currentLang === 'en' ? p.name : p.nameHi;
+                return `
+                    <div class="product-card" onclick="showProductDetail(${p.id})">
+                        <div class="product-image">${p.emoji}</div>
+                        <div class="product-info">
+                            <div class="product-name">${name}</div>
+                            <div class="product-rating">⭐ ${p.rating}</div>
+                            <div>
+                                <span class="product-price">₹${p.price.toLocaleString('en-IN')}</span>
+                                <span class="product-original-price">₹${p.originalPrice.toLocaleString('en-IN')}</span>
+                                <span class="product-discount">${discount}% ${currentLang === 'en' ? 'off' : 'छूट'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            updateLanguage();
+        }
+
+        function performSearch() {
+            searchQuery = document.getElementById('searchBox').value;
+            applyFilters();
+        }
+
+        function clearFilters() {
+            document.getElementById('minPrice').value = '';
+            document.getElementById('maxPrice').value = '';
+            document.getElementById('rating4').checked = false;
+            document.getElementById('rating3').checked = false;
+            searchQuery = '';
+            document.getElementById('searchBox').value = '';
+            currentCategory = 'all';
+            
+            // Reset sort button visuals to popularity
+            document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.sort-btn[onclick="sortProducts('popularity')"]`).classList.add('active');
+            currentSort = 'popularity';
+            
+            renderCategories();
+            applyFilters();
+        }
+        
+        // --- NEW/REVISED FUNCTIONALITY ---
+
+        function showProductDetail(id) {
+            const product = products.find(p => p.id === id);
+            const container = document.getElementById('mainContainer');
+
+            if (!product) {
+                container.innerHTML = `<h2 style="text-align: center; padding: 5rem;">${currentLang === 'en' ? 'Product Not Found' : 'उत्पाद नहीं मिला'}</h2>`;
+                return;
+            }
+
+            const name = currentLang === 'en' ? product.name : product.nameHi;
+            const discount = Math.round((product.originalPrice - product.price) / product.originalPrice * 100);
+            const featuresList = product.features.map(f => `<li>${f}</li>`).join('');
+            
+            // Simulate a new page load by replacing the main content
+            container.style.gridTemplateColumns = '1fr';
+            container.innerHTML = `
+                <div class="product-page">
+                    <button class="back-btn" onclick="goBackToProducts()">
+                        ← <span data-en="Back to Products" data-hi="उत्पादों पर वापस जाएँ">${currentLang === 'en' ? 'Back to Products' : 'उत्पादों पर वापस जाएँ'}</span>
+                    </button>
+                    <div class="product-detail-layout">
+                        <div class="product-detail-image">${product.emoji}</div>
+                        <div class="product-detail-info">
+                            <h1 style="margin-bottom: 0.5rem;">${name}</h1>
+                            <div class="product-rating" style="margin-bottom: 1rem;">⭐ ${product.rating}</div>
+                            
+                            <div style="margin-bottom: 1.5rem;">
+                                <span class="product-price">₹${product.price.toLocaleString('en-IN')}</span>
+                                <span class="product-original-price">₹${product.originalPrice.toLocaleString('en-IN')}</span>
+                                <span class="product-discount">${discount}% ${currentLang === 'en' ? 'off' : 'छूट'}</span>
+                            </div>
+                            
+                            <p style="color: #388e3c; font-weight: 600; margin-bottom: 2rem;">
+                                ${currentLang === 'en' ? 'Free Delivery' : 'मुफ्त डिलीवरी'}
+                            </p>
+                            
+                            <div class="product-detail-features">
+                                <h3 style="margin-bottom: 0.5rem;" data-en="Key Features" data-hi="मुख्य विशेषताएं">${currentLang === 'en' ? 'Key Features' : 'मुख्य विशेषताएं'}</h3>
+                                <ul>${featuresList}</ul>
+                            </div>
+
+                            <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                                <span data-en="ADD TO CART" data-hi="कार्ट में जोड़ें">${currentLang === 'en' ? 'ADD TO CART' : 'कार्ट में जोड़ें'}</span>
+                            </button>
+                            <button class="buy-now-btn" onclick="addToCart(${product.id}); showCart()">
+                                <span data-en="BUY NOW" data-hi="अभी खरीदें">${currentLang === 'en' ? 'BUY NOW' : 'अभी खरीदें'}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            updateLanguage();
+        }
+        
+        function goBackToProducts() {
+            const container = document.getElementById('mainContainer');
+            // Restore the original grid layout and content
+            container.style.gridTemplateColumns = '250px 1fr';
+            container.innerHTML = initialProductPageHTML;
+            
+            // Re-initialize listeners and render everything based on current state
+            setupFilterListeners();
+            renderCategories();
+            applyFilters();
+        }
+
+        // --- END NEW/REVISED FUNCTIONALITY ---
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existingItem = cart.find(item => item.id === id);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartCount();
+            alert(currentLang === 'en' ? `Added ${product.name} to cart!` : `${product.nameHi} को कार्ट में जोड़ दिया गया!`);
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        function showCart() {
+            const modal = document.getElementById('cartModal');
+            const content = document.getElementById('cartContent');
+
+            if (cart.length === 0) {
+                content.innerHTML = `
+                    <div class="empty-cart">
+                        <div style="font-size: 5rem; margin-bottom: 1rem;">🛒</div>
+                        <h3 data-en="Your cart is empty" data-hi="आपकी कार्ट खाली है">${currentLang === 'en' ? 'Your cart is empty' : 'आपकी कार्ट खाली है'}</h3>
+                        <p data-en="Add some products to get started!" data-hi="शुरू करने के लिए कुछ उत्पाद जोड़ें!">${currentLang === 'en' ? 'Add some products to get started!' : 'शुरू करने के लिए कुछ उत्पाद जोड़ें!'}</p>
+                    </div>
+                `;
+            } else {
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const savings = cart.reduce((sum, item) => sum + ((item.originalPrice - item.price) * item.quantity), 0);
+
+                content.innerHTML = `
+                    <h2 style="padding: 1.5rem 2rem 0; font-weight: 600;" data-en="Shopping Cart" data-hi="शॉपिंग कार्ट">${currentLang === 'en' ? 'Shopping Cart' : 'शॉपिंग कार्ट'}</h2>
+                    <div class="cart-items">
+                        ${cart.map((item, index) => {
+                            const name = currentLang === 'en' ? item.name : item.nameHi;
+                            return `
+                                <div class="cart-item">
+                                    <div class="cart-item-image">${item.emoji}</div>
+                                    <div class="cart-item-info">
+                                        <div class="cart-item-name">${name}</div>
+                                        <div style="color: #878787; margin-top: 0.5rem;">
+                                            ₹${item.price.toLocaleString('en-IN')} × ${item.quantity}
+                                        </div>
+                                    </div>
+                                    <div class="cart-item-actions">
+                                        <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">−</button>
+                                        <span style="font-weight: 600; min-width: 30px; text-align: center;">${item.quantity}</span>
+                                        <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                                        <button class="remove-btn" onclick="removeFromCart(${index})">${currentLang === 'en' ? 'REMOVE' : 'हटाएं'}</button>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div class="cart-summary">
+                        <div>
+                            <div style="margin-bottom: 0.5rem;">
+                                <span data-en="Total Savings:" data-hi="कुल बचत:">${currentLang === 'en' ? 'Total Savings:' : 'कुल बचत:'}</span>
+                                <span style="color: #388e3c; font-weight: 600; margin-left: 0.5rem;">₹${savings.toLocaleString('en-IN')}</span>
+                            </div>
+                            <div style="font-size: 1.5rem; font-weight: bold;">
+                                <span data-en="Total:" data-hi="कुल:">${currentLang === 'en' ? 'Total:' : 'कुल:'}</span>
+                                <span style="color: #212121; margin-left: 0.5rem;">₹${total.toLocaleString('en-IN')}</span>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" style="width: 200px;" onclick="checkout()">
+                            <span data-en="PLACE ORDER" data-hi="ऑर्डर करें">${currentLang === 'en' ? 'PLACE ORDER' : 'ऑर्डर करें'}</span>
+                        </button>
+                    </div>
+                `;
+            }
+
+            modal.classList.add('active');
+            updateLanguage();
+        }
+
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartCount();
+            showCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            showCart();
+        }
+
+        function checkout() {
+            alert(currentLang === 'en' ? 'Order placed successfully! Thank you for shopping with ShopKaro.' : 'ऑर्डर सफलतापूर्वक दिया गया! ShopKaro के साथ खरीदारी करने के लिए धन्यवाद।');
+            cart = [];
+            updateCartCount();
+            closeModal('cartModal');
+        }
+
+        function showLogin() {
+            alert(currentLang === 'en' ? 'Login feature coming soon!' : 'लॉगिन सुविधा जल्द आ रही है!');
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            document.getElementById('langText').textContent = currentLang === 'en' ? 'हिंदी' : 'English';
+            updateLanguage();
+            renderCategories();
+            // Re-run applyFilters to re-render products with new language text
+            if (document.getElementById('productsSection')) {
+                applyFilters();
+            } else {
+                // If on a product detail page, simulate the language change there
+                const currentProductId = document.querySelector('.product-page')?.getAttribute('data-product-id');
+                if(currentProductId) {
+                    // Re-render the detail page for language update
+                    showProductDetail(parseInt(currentProductId)); 
+                }
+            }
+        }
+
+        function updateLanguage() {
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const enText = el.getAttribute('data-en');
+                const hiText = el.getAttribute('data-hi');
+                if (el.tagName === 'INPUT') {
+                    if (el.placeholder) {
+                        el.placeholder = currentLang === 'en' ? el.getAttribute('data-en-placeholder') : el.getAttribute('data-hi-placeholder');
+                    }
+                } else {
+                    el.textContent = currentLang === 'en' ? enText : hiText;
+                }
+            });
+            
+            // Re-apply product titles, cart content title, etc. which are set dynamically
+            if (document.getElementById('productsSection')) {
+                const categoryName = categories.find(c => c.id === currentCategory)?.name;
+                const categoryNameHi = categories.find(c => c.id === currentCategory)?.nameHi;
+                let titleText;
+                if (currentCategory !== 'all') {
+                    titleText = currentLang === 'en' ? `${categoryName} Products` : `${categoryNameHi} उत्पाद`;
+                } else {
+                    titleText = currentLang === 'en' ? 'All Products' : 'सभी उत्पाद';
+                }
+                document.getElementById('productsTitle').textContent = titleText;
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        init();
+        
+        // Final Step: After the initial run, save the main content again.
+        // This is a necessary hack in this single-file setup to capture the fully rendered initial state.
+        window.onload = function() {
+            const mainContainer = document.getElementById('mainContainer');
+            // Re-save the HTML after JS initialization to include event handlers and initial rendering
+            initialProductPageHTML = mainContainer.innerHTML;
+        };
+    </script>
+</body>
+</html>
